@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<section class="section-agenda">
+    <h1 class="h-tecnico">Técnicos</h1>
+    <div class="tecnicos"></div>
+    <hr class="mb">
+    <div class="header-agenda">
+        <h2>Agenda: <span class="name-tecnico"></span></h2>
+        <div class="d-flex">
+            <form action="" method="get" id="form-fecha">    
+                <input type="date" name="date" id="input_date" value={{date}} onchange="submit()" min="{{today}}">
+            </form>
+            <form action="../instalaciones/guardar" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="datos-insts" id="datos">
+                <input type="submit" class="btn-save" value="GUARDAR">
+            </form>
+        </div>
+    </div>
+    <div class="principal">
+        <div class="tabla-ip d-flex">
+            <div class="tabla">
+                <div></div>
+                <div class="fechas"></div>
+                <div class="horas"></div>
+                <div class="agenda"></div>
+            </div>
+            <div class="b-ip-g">
+                <h2>Por asignar</h2>
+                <input type="text" id="inp-search" placeholder="Buscar..." onkeyup="search()">
+                <div class="insts-pend"></div>  
+                <div class="btns-add">
+                    <a class="btn-add" href="../instalaciones/create_instalacion">Añadir +</a>
+                    <label class="btn-add" for="inp-csv">Añadir (.csv)</label>
+                    <input type="file" name="file-csv" id="inp-csv" class="d-none">
+                </div>    
+            </div>
+        </div>
+        
+
+        <div class="opt-insts">
+            <h2 class="h-all-insts">Instalaciones Asignadas</h2>
+            <div class="insts-asign-or"></div>
+        </div>
+        
+    </div>
+</section>
+
+{% endblock content %}
+    

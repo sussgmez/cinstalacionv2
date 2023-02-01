@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="login">
+    <form action="" method="post" class="login-form">
+        {% csrf_token %}
+        {{ form.as_div }}
+
+        {% for error in errors_msg %}
+            <div class="error"><p>{{error}}</p></div>
+        {% endfor %}
+
+        <input type="submit" value="Ingresar" class="btn-ingresar">
+    </form>
+</div>
+{% endblock content %}
+    

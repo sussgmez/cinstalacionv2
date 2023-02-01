@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-form-instalacion">
+    
+    <div class="div-form">
+        <h1>Añadir Instalacion</h1>
+        <hr>
+        <form action="" method="post" id="form-instalacion">
+            {% csrf_token %}
+            {{ form.as_div }}
+
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <div class="error">
+                    <p>{{ error }}</p>
+                </div>
+                {% endfor %}
+            {% endfor %}
+
+
+            <input type="submit" value="Ingresar" class="btn-ingresar">
+            
+
+            
+                
+        </form>      
+    </div>
+</section>
+{% endblock content %}
+    

@@ -1,0 +1,763 @@
+@import 'variable';
+@import 'responsive';
+@import 'agenda';
+
+* {
+    box-sizing: border-box;
+    font-family: $font1;
+}
+
+h1, h2, p {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    color: $color1;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding: 10px 20px;
+
+    background-color: $color1;
+
+    @include sm {
+        display: block;
+    }
+
+    h1 {
+        color: $color3;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .url {
+        background-color: $color2;
+        text-decoration: none;
+        padding: 6px 20px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        border-radius: 4px;
+
+        transition: all 0.2s;
+
+        margin: 0 10px;
+
+        &:hover {
+            border: 1px solid $color3;
+            color: $color3;
+        }
+    }
+
+    .navbar {
+        @include sm {
+            .url {
+                max-width: 240px;
+                margin: auto;
+                display: block;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.section-agenda {
+    padding: 20px;
+}
+
+
+.login {
+    width: 100%;
+    padding: 40px 10px;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: $color2;
+    border: 2px solid $color5;
+    border-radius: 4px;
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: $color1;
+        font-weight: 700;
+    }
+
+    input {
+        width: 100%;
+        border: 1px solid $color8;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .error {
+        padding: 10px;
+        font-size: 12px;
+        background-color: $color12;
+        color: $color11;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .btn-ingresar {
+        border: none;
+        background-color: $color3;
+        color: $color1;
+        font-weight: 700;
+        font-size: 16px;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+
+        &:hover {
+            cursor: pointer;
+            border: 2px solid $color1;
+        }
+    }
+}
+
+.h-tecnico {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.tecnicos {
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+
+    @include lg {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include sm {
+        grid-template-columns: 1fr;
+    }
+    
+
+    .tecnico {
+        padding: 10px 20px;
+        background-color: $color7;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        box-shadow: 0 0 $color2;
+        transition: all 0.2s;
+        font-weight: 700;
+        cursor: pointer;
+        &:hover {
+            border: 1px solid $color1;
+            box-shadow: 0 4px $color1;
+        }
+
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        .d-flex {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .num-insts {
+            font-weight: 400;
+        }
+    }
+
+    .active {
+        background-color: $color3;
+    }
+}
+
+.mb {
+    margin: 20px 0;
+}
+
+.header-agenda {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    margin-bottom: 10px;
+    max-width: 560px;
+
+    @include lg {
+        display: block;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    }
+
+    .btn-save {
+        height: 100%;
+        padding: 0 10px;
+        background-color: $color9;
+        border: 2px solid $color9;
+        font-size: 16px;
+        font-weight: 700;
+        color: $color2;
+
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color10;
+        }
+    }
+
+    .d-flex {
+        justify-content: space-around;
+    }
+
+}
+
+
+#form-fecha {
+    margin-right: 10px;
+    #input_date {
+        border: 1px solid $color1;
+        border-radius: 4px;
+        padding: 8px;
+
+    }
+}
+
+.tabla-ip {
+    margin-bottom: 40px;
+    
+    @include md {
+        display: block;
+    }
+   
+}
+
+.tabla {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    overflow-x: scroll;
+    max-width: 1000px;
+
+    @include md {
+        margin-bottom: 20px;
+    }
+
+    .horas {
+        position: sticky;
+        left: 0;
+        z-index: 12;
+    }
+
+    .hora {
+        text-align: center;
+        border: 1px solid $color4;
+        border-bottom: none;
+        padding: 8px 0;
+        font-size: 14px;
+        height: 36px;
+        background-color: $color2;
+
+        &:last-child {
+            border: 1px solid $color4;
+        }
+    }
+
+    .fechas {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .fecha {
+        text-align: center;
+        padding: 16px;
+        background-color: $color1;
+        color: $color2;
+        margin: 1px;
+    }
+    
+    .agenda {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        width: 940px
+    }
+
+    .celda {
+        height: 34px;
+        background-color: $color5;
+        margin: 1px;
+        position: relative;
+
+        &:hover {
+            .btn-asignar {
+                display: block;
+            }
+        }
+
+        .btn-asignar {
+            display: none;
+
+            right: 10px;
+            left: 10px;
+            top: 4px;
+
+            position: absolute;
+            z-index: 10;
+
+            background-color: rgba($color: $color1, $alpha: 0.5);
+            
+            border: none;
+            border-radius: 4px;
+
+            font-size: 14px;
+            font-weight: 700;
+            color: $color2;
+        }
+
+    }
+
+    .instalacion-asign {
+        background-color: $color6;
+        margin: 4px;
+        padding: 10px;
+        z-index: 10;
+        border-radius: 4px;
+        border: 1px solid $color2;
+        position: relative;
+        transition: border 0.2s;
+        font-size: 14px;
+        overflow-y: overlay;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background: transparent;
+        }
+          
+
+        &:hover {
+            border: 1px solid $color1;
+            .btns {
+                display: flex;
+                justify-content: space-between;
+                padding: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                background: $color3;
+            }
+        }
+
+        b {
+            font-size: 16px;
+            color: $color1;
+        }
+        p {
+            margin-bottom: 4px;
+            color: $color8;
+        }
+
+        .btns {
+            width: 100%;
+            background-color: $color1;
+            display: none;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        .p-completada {
+            display: none;
+            font-weight: 700;
+            color: $color9;
+            font-size: 16px;
+        }
+
+        .btn-remove, .btn-complete, .btn-cancel {
+            cursor: pointer;
+            font-weight: 700;
+            color: $color2;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+
+        .btn-remove, .btn-cancel {
+            background-color: $color11;
+        }
+
+        .btn-complete {
+            background-color: $color9;
+        }
+
+        .btn-cancel, .div-completada {
+            display: none;
+        }
+
+        .btn-remove {
+            background-color: $color11;
+            font-weight: 700;
+            color: $color2;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+    }
+
+    .completed {
+        .btn-cancel, .p-completada{
+            display: inline;
+        }
+
+        .btn-remove, .btn-complete {
+            display: none;
+        }
+    }
+
+    // TIEMPOS ESTIMADOS 
+
+    .te-1 {
+        height: calc(36px - 10px);
+    }
+    .te-2 {
+        height: calc(36px * 2 - 10px);
+    }
+    .te-3 {
+        height: calc(36px * 3 - 10px);
+    }
+    .te-4 {
+        height: calc(36px * 4 - 10px);
+    }
+    .te-5 {
+        height: calc(36px * 5 - 10px);
+    }
+    .te-6 {
+        height: calc(36px * 6 - 10px);
+    }
+    .te-7 {
+        height: calc(36px * 7 - 10px);
+    }
+    .te-8 {
+        height: calc(36px * 8 - 10px);
+    }
+    .te-9 {
+        height: calc(36px * 9 - 10px);
+    }
+    .te-10 {
+        height: calc(36px * 10 - 10px);
+    }
+}
+
+.b-ip-g {
+    min-width: 300px;
+    width: 300px;
+    background-color: $color6;
+    padding: 10px;
+    margin: 0 8px;
+
+    @include md {
+        width: 100%;
+        min-width:auto;
+        margin: 0;
+    }
+
+    h2 {
+        margin-bottom: 16px;
+    }
+    
+    #inp-search {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $color8;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .insts-pend {
+        width: 100%;
+        padding: 10px;
+        background-color: $color2;
+        height: 600px;
+        overflow-y: scroll;
+        margin-bottom: 10px;
+
+        .active {
+            background-color: $color7 !important;
+        }
+    }
+
+    .instalacion-pend {
+        background-color: $color5;
+        padding: 10px;
+        border-radius: 4px;
+        position: relative;
+        margin-bottom: 10px;
+        border: 1px solid transparent;
+
+        min-height: 64px;
+
+        p {
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .btn-asignar-inst {
+            display: none;
+            border: none;
+
+            background-color: rgba($color1, $alpha: 0.8);
+            border-radius: 6px;
+            width: 40px;
+
+            font-size: 24px;
+            color: $color2;
+
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            bottom: 10px;
+
+            font-weight: 700;
+            line-height: 0;
+        }
+
+        &:hover {
+            border: 1px solid $color5;
+            background-color: $color5;
+            .btn-asignar-inst {
+                display: block;
+            }
+        }
+
+        
+    }
+}
+
+.btns-add {
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.btn-add {
+    width: 100%;
+    display: inline-block;
+    padding: 10px;
+    background-color: $color3;
+    border-radius: 4px;
+    text-decoration: none;
+    color: $color1;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.opt-insts {
+    
+    .h-all-insts {
+        font-size: 20px;
+        margin-bottom: 16px;
+        span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+
+    .insts-asign-or {
+        padding: 10px;
+        border-radius: 4px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+        min-height: 400px;
+        background-color: $color1;
+
+        @include xl {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include md {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include sm {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        
+        
+        .instalacion-or {
+            display: inline-block;
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid transparent;
+            background-color: $color2;
+            border-radius: 4px;
+            position: relative;
+            overflow-y: overlay;
+            height: 180px;
+
+            transition: all 0.2s;
+
+            cursor:default;
+
+            .nro-contrato {
+                display: inline-block;
+                margin-bottom: 4px;
+                font-size: 16px;
+            }
+        
+            &:hover {
+                border: 1px solid $color1;
+                box-shadow: 0 2px $color1;
+
+                .btns {
+                    display: block;
+                }
+            }
+        }
+
+        .btns {
+            display: none;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+        }
+        .btn-remove, .btn-complete, .btn-cancel {
+            cursor: pointer;
+            font-weight: 700;
+            color: $color2;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+
+        .btn-remove, .btn-cancel {
+            background-color: $color11;
+        }
+
+        .btn-complete {
+            background-color: $color9;
+        }
+
+        .btn-cancel, .p-completada, .divisor {
+            display: none;
+        }
+
+        .p-completada {
+            font-weight: 700;
+            color: $color9;
+            font-size: 16px;
+        }
+    }
+
+    .completed {
+        .btn-cancel, .p-completada, .divisor {
+            display: inline;
+        }
+
+        .btn-remove, .btn-complete {
+            display: none;
+        }
+    }
+}
+
+.section-form-instalacion {
+    padding: 20px;
+    
+    .div-form {
+        max-width: 800px;
+        margin: 0 auto;    
+        border: 1px solid $color1;
+        border-radius: 4px;
+        padding: 40px;
+    }
+    h1 {
+        text-align: center;
+    }
+    hr {
+        margin: 20px 0 30px 0;
+    }
+}
+
+#form-instalacion {
+    width: 650px;
+    margin: auto;
+    div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    label {
+        text-align: right;
+        font-weight: 700;
+    }
+
+    input, textarea, select {
+        grid-column: 2 / 3;
+        padding: 10px;
+        border: 1px solid $color1;
+        border-radius: 4px;
+        resize: none;
+    }
+
+    textarea {
+        grid-column: 2 / 4;
+    }
+
+    .btn-ingresar {
+        display: block;
+        background-color: $color1;
+        color: $color2;
+        font-weight: 700;
+        font-size: 16px;
+        width: 300px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .errorlist {
+        display: none;
+    }
+
+    .error {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: $color12;
+        color: $color11;
+        p {
+            text-align: center;
+        }
+    }
+}
