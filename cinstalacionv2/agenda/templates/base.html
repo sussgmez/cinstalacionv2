@@ -17,10 +17,17 @@
         <a href="{% url 'agenda' %}">
             <h1>Ctrl|Inst</h1>
         </a>
+        
+        {% if user.is_authenticated %}
         <nav class="navbar">
             <a href="{% url 'agenda' %}" class="url">Agenda</a>
             <a href="{% url 'logout' %}" class="url">Cerrar Sesión</a>
-        </nav>
+        </nav> 
+        {% else %}   
+        <nav class="navbar">
+            <a href="{% url 'login' %}" class="url">Iniciar Sesión</a>
+        </nav>    
+        {% endif %}
     </header>
     {% block content %}{% endblock content %}       
     <script src="{% static 'agenda/js/main.js' %}"></script>

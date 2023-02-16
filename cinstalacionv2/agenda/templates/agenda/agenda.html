@@ -34,12 +34,13 @@
                 <div class="btns-add">
                     <a class="btn-add" href="../instalaciones/create_instalacion">Añadir +</a>
                     <label class="btn-add" for="inp-csv">Añadir (.csv)</label>
-                    <input type="file" name="file-csv" id="inp-csv" class="d-none">
+                    <form action="../instalaciones/csv" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="csv" id="inp-csv" class="d-none" accept=".csv" onchange="submit()">
+                    </form>
                 </div>    
             </div>
         </div>
-        
-
         <div class="opt-insts">
             <h2 class="h-all-insts">Instalaciones Asignadas</h2>
             <div class="insts-asign-or"></div>

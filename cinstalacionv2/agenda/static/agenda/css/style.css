@@ -191,15 +191,19 @@ a {
 .header-agenda .btn-save {
   height: 100%;
   padding: 0 10px;
-  background-color: #37cf7b;
-  border: 2px solid #37cf7b;
+  background-color: #bdf3d5;
+  border: 2px solid #bdf3d5;
   font-size: 16px;
   font-weight: 700;
   color: #fff;
+}
+.header-agenda .save-active {
+  background-color: #37cf7b;
+  border: 2px solid #37cf7b;
   cursor: pointer;
 }
-.header-agenda .btn-save:hover {
-  background-color: #79e2a8;
+.header-agenda .save-active:hover {
+  background-color: #bdf3d5;
 }
 .header-agenda .d-flex {
   justify-content: space-around;
@@ -261,6 +265,7 @@ a {
   background-color: #1E1E1E;
   color: #fff;
   margin: 1px;
+  cursor: pointer;
 }
 .tabla .agenda {
   display: grid;
@@ -333,10 +338,10 @@ a {
   color: #333333;
 }
 .tabla .instalacion-asign .btns {
-  width: 100%;
   background-color: #1E1E1E;
   display: none;
-  position: absolute;
+  border-radius: 4px;
+  position: sticky;
   bottom: 0;
   right: 0;
   left: 0;
@@ -611,7 +616,7 @@ a {
 }
 
 #form-instalacion {
-  width: 650px;
+  max-width: 650px;
   margin: auto;
 }
 #form-instalacion div {
@@ -620,6 +625,11 @@ a {
   gap: 10px;
   margin-bottom: 10px;
   align-items: center;
+}
+@media (max-width: 700px) {
+  #form-instalacion div {
+    display: block;
+  }
 }
 #form-instalacion label {
   text-align: right;
@@ -632,6 +642,13 @@ a {
   border-radius: 4px;
   resize: none;
 }
+@media (max-width: 700px) {
+  #form-instalacion input, #form-instalacion textarea, #form-instalacion select {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
 #form-instalacion textarea {
   grid-column: 2/4;
 }
@@ -641,7 +658,8 @@ a {
   color: #fff;
   font-weight: 700;
   font-size: 16px;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   margin: auto;
   margin-top: 40px;
 }

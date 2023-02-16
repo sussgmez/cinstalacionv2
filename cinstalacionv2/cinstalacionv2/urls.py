@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from agenda.views import redirect_agenda, agenda, tecnicos_json, instalaciones_json, guardar, create_instalacion, update_instalacion, login_view, logout_view
+from agenda.views import redirect_agenda, agenda, tecnicos_json, instalaciones_json, guardar, create_instalacion, update_instalacion, login_view, logout_view, charge_csv
 
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('tecnicos/json', tecnicos_json, name='tecnicos_json'),
     path('instalaciones/json', instalaciones_json, name='instalaciones_json'),
     path('instalaciones/guardar', guardar, name='guardar'),
+    path('instalaciones/csv', charge_csv, name='charge_csv'),
     path('instalaciones/create_instalacion', create_instalacion, name='create_instalacion'),
     path('instalaciones/update_instalacion/<slug:nro_contrato>', update_instalacion, name='update_instalacion'),
 ]

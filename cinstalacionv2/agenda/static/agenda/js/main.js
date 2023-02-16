@@ -17,6 +17,7 @@ window.onload = function () {
     Tecnico.get_tecnicos()
     .finally(function() {
         TECNICOS[0].select_tecnico()
+        act_contador()
         Instalacion.get_instalaciones()
         .finally(function() {
             INSTALACIONES.forEach(instalacion =>{
@@ -26,6 +27,8 @@ window.onload = function () {
                     instalacion.set_asign()
                 } 
             })
+            document.querySelector('.btn-save').classList.remove('save-active')
+            document.querySelector('.btn-save').disabled = true
         })
     })
 }
@@ -47,7 +50,6 @@ class Instalacion {
         this.hora = hora
 
         this.contenedor = document.createElement('div')
-    
     }
 
     set_pendiente() {
@@ -199,8 +201,6 @@ class Instalacion {
                         instalacion.fields.status
                         ))
                 }
-
-
             });
         })
         return instalaciones
@@ -247,6 +247,7 @@ class Tecnico {
     }
 
     select_tecnico() {
+        tecnico_activo = this
         document.querySelectorAll('.celda').forEach(celda => celda.classList.add('d-none'))
         this.agenda.forEach(fila => {
             fila.forEach(celda => {
@@ -298,6 +299,9 @@ function act_contador() {
 }
 
 function act_datos() {
+    document.querySelector('.btn-save').classList.add('save-active')
+    document.querySelector('.btn-save').disabled = false
+
     let text = ""
     for (let i = 0; i < INSTALACIONES.length; i++) {
         const instalacion = INSTALACIONES[i];
@@ -410,6 +414,45 @@ function get_fechas() {
         contenedor_dia.classList = 'fecha'
         contenedor_dia.innerHTML = `${fecha.getUTCDate()}/${fecha.getUTCMonth() + 1}/${fecha.getUTCFullYear()}`
         contenedor_fechas.appendChild(contenedor_dia)
+
+        contenedor_dia.addEventListener('click', () => {
+            let instalaciones_fecha = []
+            INSTALACIONES.forEach(instalacion => {
+                if (instalacion.tecnico == tecnico_activo) {
+                    if (instalacion.fecha.getUTCDate() == fecha.getUTCDate() &&
+                        instalacion.fecha.getUTCMonth() == fecha.getUTCMonth() &&
+                        instalacion.fecha.getUTCFullYear() == fecha.getUTCFullYear()
+                    ) {
+                        let hora_mostrada
+
+                        if (instalacion.hora % 2 == 0) {
+                            hora_mostrada = `${instalacion.hora / 2 + 8}:00`
+                        } else {
+                            hora_mostrada = `${Math.trunc(instalacion.hora / 2) + 8}:30`
+                        }
+
+                        instalaciones_fecha[instalacion.hora] = 
+                        `${hora_mostrada} - C${instalacion.nro_contrato}, ${instalacion.nombre_cliente}, ${instalacion.direccion.slice(0, 80)}...
+
+`
+                    }
+                }
+            })
+            texto = `Agenda ${tecnico_activo.nombre} ${tecnico_activo.apellido} ${fecha.getUTCDate()}-${fecha.getUTCMonth() + 1}-${fecha.getFullYear()}
+
+`
+
+            instalaciones_fecha.forEach(data => {
+                texto += data
+            })
+
+
+            navigator.clipboard.writeText(texto)
+            .finally(() => {
+                alert("Se ha copiado la agenda al portapapeles")
+            })
+        })
+
         FECHAS.push(fecha)
     }
 }

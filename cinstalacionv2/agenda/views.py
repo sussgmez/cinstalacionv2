@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import InstalacionForm, InstalacionUpdateForm, LoginForm
 from .models import Tecnico, Instalacion
+import csv, io
 
 import datetime
 
@@ -32,7 +33,7 @@ def tecnicos_json(request):
 
 @login_required
 def instalaciones_json(request):
-    json = serializers.serialize('json', Instalacion.objects.all())
+    json = serializers.serialize('json', Instalacion.objects.filter(status=0) | Instalacion.objects.filter(status=1))
     return HttpResponse(json)
 
 @login_required
@@ -134,3 +135,69 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+    
+@login_required
+def charge_csv(request):
+    if request.method == "POST":
+        content = io.StringIO(request.FILES['csv'].read().decode('utf-8'))
+        reader = csv.reader(content)
+
+        next(reader)
+
+        for datos in reader:
+            nombre_w_datos_extras = datos[1].split('-')
+
+            nro_contrato = datos[0]
+            nombre = nombre_w_datos_extras[0].casefold().title()
+            
+            numero_telefono1 = datos[5]
+            if numero_telefono1 == "0":
+                numero_telefono1 = None
+
+            numero_telefono2 = datos[6]
+            if numero_telefono2 == "0":
+                numero_telefono2 = None
+            
+            direccion = datos[7].casefold().capitalize()
+            plan = datos[8]
+
+            if plan == "BASICO PLUS":
+                plan = "BP"
+            elif plan == "BASICO":
+                plan = "BA"
+            elif plan == "BRONCE":
+                plan = "BR"
+            elif plan == "PLATA":
+                plan = "PL"
+            elif plan == "ORO":
+                plan = "OR"
+            elif plan == "EMPRENDEDOR":
+                plan = "EMP"
+            elif plan == "PRODUCTIVO":
+                plan = "PRD"
+            elif plan == "PRODUCTIVO PRO":
+                plan = "PRDP"
+            elif plan == "VISIONARIO PRO":
+                plan = "VISP"
+
+            observaciones = ""
+            try:
+                observaciones = nombre_w_datos_extras[1]
+            except:
+                pass
+
+            try:
+                Instalacion.objects.get_or_create(
+                    nro_contrato=nro_contrato,
+                    nombre_cliente=nombre,
+                    numero_telefono1=numero_telefono1,
+                    numero_telefono2=numero_telefono2,
+                    direccion=direccion,
+                    plan=plan,
+                    observaciones=observaciones
+                )
+            except:
+                pass
+
+
+    return redirect("agenda")

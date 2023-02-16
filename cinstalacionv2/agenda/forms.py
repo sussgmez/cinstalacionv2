@@ -6,8 +6,13 @@ PLANES = [
     ['BA', 'BÁSICO'],
     ['BR', 'BRONCE'],
     ['PL', 'PLATA'],
-    ['OR', 'ORO']
+    ['OR', 'ORO'],
+    ['EMP', 'EMPRENDEDOR'],
+    ['PRD', 'PRODUCTIVO'],
+    ['PRDP', 'PRODUCTIVO PRO'],
+    ['VISP', 'VISIONARIO PRO']
 ]
+
 
 HORAS_ESTIMADAS = [
     [1, "00:30"],
