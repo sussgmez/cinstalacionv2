@@ -6,7 +6,11 @@ PLANES = [
     ['BA', 'BÁSICO'],
     ['BR', 'BRONCE'],
     ['PL', 'PLATA'],
-    ['OR', 'ORO']
+    ['OR', 'ORO'],
+    ['EMP', 'EMPRENDEDOR'],
+    ['PRD', 'PRODUCTIVO'],
+    ['PRDP', 'PRODUCTIVO PRO'],
+    ['VISP', 'VISIONARIO PRO']
 ]
 
 HORAS_ESTIMADAS = [
@@ -83,7 +87,7 @@ class Instalacion(models.Model):
     
     # Datos para la instalación
     prioridad = models.IntegerField(verbose_name="Prioridad", choices=PRIORIDAD, default=1)
-    tiempo_estimado = models.IntegerField(verbose_name="Tiempo estimado (en horas)", choices=HORAS_ESTIMADAS, default=2)
+    tiempo_estimado = models.IntegerField(verbose_name="Tiempo estimado (en horas)", choices=HORAS_ESTIMADAS, default=3)
     observaciones = models.TextField(verbose_name="Observaciones", blank=True, null=True) 
 
     # Status diferencial para la instalación: Por agendar, Agendada y Completada
